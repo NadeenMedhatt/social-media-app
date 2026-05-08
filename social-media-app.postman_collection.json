@@ -1,0 +1,484 @@
+{
+  "info": {
+    "_postman_id": "5c4aebad-17c9-4272-b991-df2d1fcb7684",
+    "name": "social-media-app",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "37699001"
+  },
+  "item": [
+    {
+      "name": "auth",
+      "item": [
+        {
+          "name": "signup",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"username\":\"Nadeen Medhat\",\r\n    \"email\":\"nadeenmedhat01@gmail.com\",\r\n    \"password\":\"Nn123456@\",\r\n    \"confirmPassword\":\"Nn123456@\",\r\n    \"phone\":\"01234567890\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{Base_Url}}/auth/signup",
+              "host": [
+                "{{Base_Url}}"
+              ],
+              "path": [
+                "auth",
+                "signup"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "confirm-email",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\":\"nadeenmedhat01@gmail.com\",\r\n    \"otp\":\"550402\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/auth/confirm-email",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "auth",
+                "confirm-email"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "resend-confirm-email",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\":\"nadeenmedhat117@gmail.com\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/auth/resend-confirm-email",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "auth",
+                "resend-confirm-email"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "login",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "let response = pm.response.json();\r",
+                  "pm.environment.set(\"BEARER_ACCESS_TOKEN\", response.data.access_token);\r",
+                  "pm.environment.set(\"BERAER_REFRESH_TOKEN\", response.data.refresh_token);\r",
+                  "console.log(\"✅ Tokens saved to environment variables: ACCESS_TOKEN & REFRESH_TOKEN\");"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"email\":\"nadeenmedhat01@gmail.com\",\r\n    \"password\":\"Nn123456@\",\r\n    \"FCM\":\"cYYAq78nQ_rMxlcYCVvMN0:APA91bHrFTtontGQsmzs7Wx5vdowR5ZNnbyayEjZWE5nIPGid97wDwtLG4p3c0iCp3QAT307UvReHs_hzzDtg_ieyO3D9ASnI0jj8mHefzgR5D-b32ZWlKs\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/auth/login",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "auth",
+                "login"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "user",
+      "item": [
+        {
+          "name": "get-logged-user-data",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/user",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "user"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "logout",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text",
+                "disabled": true
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"flag\":0\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/user/logout",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "user",
+                "logout"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "upload-profile-picture",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"ContentType\":\"image/jpeg\",\r\n    \"OriginalName\":\"images.jpg\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/user/profile-image",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "user",
+                "profile-image"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "upload-profile-cover-picture",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "attachments",
+                  "type": "file",
+                  "uuid": "adff0bef-4388-4082-91d7-9b11f4c0bb8d",
+                  "src": [
+                    "/C:/Users/MHNSM/Desktop/photos/images.jpg",
+                    "/C:/Users/MHNSM/Desktop/photos/images.jpg"
+                  ]
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{url}}/user/profile-cover-images",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "user",
+                "profile-cover-images"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get-refresh-token",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BERAER_REFRESH_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{url}}/user/rotate",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "user",
+                "rotate"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete-profile",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{url}}/user",
+              "host": [
+                "{{url}}"
+              ],
+              "path": [
+                "user"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "posts",
+      "item": [
+        {
+          "name": "create-posts",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "content",
+                  "value": "",
+                  "type": "text",
+                  "uuid": "bb327e5f-b1b9-4303-93a9-ab82dac8697a"
+                },
+                {
+                  "key": "attachments",
+                  "type": "file",
+                  "uuid": "5e314103-e0ed-400a-8aad-84afdfd5738c",
+                  "src": [
+                    "/C:/Users/MHNSM/Desktop/photos/images.jpg",
+                    "/C:/Users/MHNSM/Desktop/photos/images.jpg"
+                  ]
+                },
+                {
+                  "key": "tags[0]",
+                  "value": "",
+                  "type": "text",
+                  "uuid": "8f17667b-a505-49e3-8294-853c19b2e894",
+                  "disabled": true
+                },
+                {
+                  "key": "availability",
+                  "value": "",
+                  "type": "text",
+                  "uuid": "2ce68c90-b886-46fd-8cd9-ae9ab317cb70",
+                  "disabled": true
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{Base_Url}}/post",
+              "host": [
+                "{{Base_Url}}"
+              ],
+              "path": [
+                "post"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "url",
+      "value": ""
+    },
+    {
+      "key": "token",
+      "value": ""
+    }
+  ]
+}
