@@ -1,7 +1,9 @@
+import { Types } from "mongoose";
 import { z } from "zod";
 
 
 export const generalValidationFields = {
+    id: z.string().refine(value => { return Types.ObjectId.isValid(value) }, "Invalid Object Id"),
     email: z.email(),
     password: z.string().regex(/^(?=.*[a-z]){1,}(?=.*[A-Z]){1,}(?=.*\d){1,}(?=.*\W){1,}[\w\W\d].{8,25}$/, { error: "Password must be at least 6 characters long and contain at least one letter and one number" }),
     phone: z.string().regex(/^(02|2|\+2)?01[0-25]\d{8}$/, { error: "phone not valid" }),
@@ -46,4 +48,11 @@ export const generalValidationFields = {
     //   size: joi.number().required(),
     // });
     //   },
+}
+
+export const paginationValidationSchema = {
+    query: z.strictObject({
+        page: z.coerce.number().optional(),
+        size: z.coerce.number().optional(),
+    })
 }

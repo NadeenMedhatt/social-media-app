@@ -1,8 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.generalValidationFields = void 0;
+exports.paginationValidationSchema = exports.generalValidationFields = void 0;
+const mongoose_1 = require("mongoose");
 const zod_1 = require("zod");
 exports.generalValidationFields = {
+    id: zod_1.z.string().refine(value => { return mongoose_1.Types.ObjectId.isValid(value); }, "Invalid Object Id"),
     email: zod_1.z.email(),
     password: zod_1.z.string().regex(/^(?=.*[a-z]){1,}(?=.*[A-Z]){1,}(?=.*\d){1,}(?=.*\W){1,}[\w\W\d].{8,25}$/, { error: "Password must be at least 6 characters long and contain at least one letter and one number" }),
     phone: zod_1.z.string().regex(/^(02|2|\+2)?01[0-25]\d{8}$/, { error: "phone not valid" }),
@@ -31,4 +33,10 @@ exports.generalValidationFields = {
             }
         });
     }
+};
+exports.paginationValidationSchema = {
+    query: zod_1.z.strictObject({
+        page: zod_1.z.coerce.number().optional(),
+        size: zod_1.z.coerce.number().optional(),
+    })
 };

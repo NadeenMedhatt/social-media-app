@@ -37,12 +37,29 @@ const express_1 = require("express");
 const response_1 = require("../../common/response");
 const middleware_1 = require("../../middleware");
 const multer_1 = require("../../common/utils/multer");
-const enums_1 = require("../../common/enums");
 const validators = __importStar(require("./post.validation"));
 const post_service_1 = require("./post.service");
+const validation_1 = require("../../common/validation");
+const comment_1 = require("../comment");
 const router = (0, express_1.Router)();
+router.use("/:postId/comment", comment_1.commentRouter);
+router.get("/", (0, middleware_1.authentication)(), (0, middleware_1.validation)(validation_1.paginationValidationSchema), async (req, res, next) => {
+    const data = await post_service_1.postService.listPost(req.query, req.user);
+    return (0, response_1.successResponse)({
+        res,
+        status: 200,
+        data
+    });
+});
+router.get("/profile", (0, middleware_1.authentication)(), (0, middleware_1.validation)(validation_1.paginationValidationSchema), async (req, res, next) => {
+    const data = await post_service_1.postService.listProfilePosts(req.query, req.user);
+    return (0, response_1.successResponse)({
+        res,
+        status: 200,
+        data
+    });
+});
 router.post("/", (0, middleware_1.authentication)(), (0, multer_1.cloudFileUpload)({
-    storageApproach: enums_1.StorageApproachEnum.DISK,
     validation: multer_1.fileFieldValidation.image,
     maxSize: 5
 }).array("attachments", 2), (0, middleware_1.validation)(validators.createPost), async (req, res, next) => {
@@ -50,6 +67,33 @@ router.post("/", (0, middleware_1.authentication)(), (0, multer_1.cloudFileUploa
     return (0, response_1.successResponse)({
         res,
         status: 201,
+        data
+    });
+});
+router.patch("/:postId", (0, middleware_1.authentication)(), (0, multer_1.cloudFileUpload)({
+    validation: multer_1.fileFieldValidation.image,
+    maxSize: 5
+}).array("attachments", 2), (0, middleware_1.validation)(validators.updatePost), async (req, res, next) => {
+    const data = await post_service_1.postService.updatePost(req.params, { ...req.body, ...req.files }, req.user);
+    return (0, response_1.successResponse)({
+        res,
+        status: 200,
+        data
+    });
+});
+router.delete("/:postId", (0, middleware_1.authentication)(), (0, middleware_1.validation)(validators.deletePost), async (req, res, next) => {
+    const data = await post_service_1.postService.deletePost(req.params, req.user);
+    return (0, response_1.successResponse)({
+        res,
+        status: 200,
+        data
+    });
+});
+router.patch("/:postId/react", (0, middleware_1.authentication)(), (0, middleware_1.validation)(validators.reactOnPost), async (req, res, next) => {
+    const data = await post_service_1.postService.reactOnPost(req.params, req.query, req.user);
+    return (0, response_1.successResponse)({
+        res,
+        status: 200,
         data
     });
 });

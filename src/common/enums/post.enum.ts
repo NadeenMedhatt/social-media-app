@@ -3,3 +3,11 @@ export enum AvailabilityEnum {
     FRIENDS,
     ONLY_ME
 }
+
+export enum ReactEnum {
+    LIKE,
+    LOVE,
+    HAHA,
+    SAD,
+    ANGRY,
+}

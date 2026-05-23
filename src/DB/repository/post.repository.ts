@@ -1,5 +1,5 @@
 import { PostModel } from './../model/post.model';
-import { BaseRepository } from "./base.repository";
+import { BaseRepository } from "./";
 import { IPost } from "../../common/interfaces";
 
 export class PostRepository extends BaseRepository<IPost> {

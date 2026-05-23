@@ -1,9 +1,21 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PostModel = void 0;
+exports.PostModel = exports.reactionSchema = void 0;
 const mongoose_1 = require("mongoose");
 const enums_1 = require("../../common/enums");
 const mongoose_2 = require("mongoose");
+exports.reactionSchema = new mongoose_1.Schema({
+    userId: {
+        type: mongoose_2.Types.ObjectId,
+        ref: "User",
+        required: true,
+    },
+    react: {
+        type: Number,
+        enum: enums_1.ReactEnum,
+        required: true,
+    },
+}, { _id: false });
 const postSchema = new mongoose_1.Schema({
     folderId: {
         type: String,
@@ -18,10 +30,10 @@ const postSchema = new mongoose_1.Schema({
     attachments: {
         type: [String],
     },
-    likes: [{
-            type: mongoose_2.Types.ObjectId,
-            ref: "User"
-        }],
+    likes: {
+        type: [exports.reactionSchema],
+        default: [],
+    },
     tags: [{
             type: mongoose_2.Types.ObjectId,
             ref: "User"
@@ -58,7 +70,13 @@ const postSchema = new mongoose_1.Schema({
         virtuals: true,
     }
 });
-postSchema.pre(["findOne", "find"], function () {
+postSchema.virtual("comments", {
+    localField: "_id",
+    foreignField: "postId",
+    ref: "Comment",
+    justOne: true
+});
+postSchema.pre(["findOne", "find", 'countDocuments'], function () {
     const query = this.getQuery();
     if (query.paranoid === false) {
         this.setQuery({ ...query });
@@ -86,7 +104,6 @@ postSchema.pre(["updateOne", "findOneAndUpdate"], function () {
 });
 postSchema.pre(["deleteOne", "findOneAndDelete"], function () {
     const query = this.getQuery();
-    console.log({ query });
     if (query.force === true) {
         this.setQuery({ ...query });
     }

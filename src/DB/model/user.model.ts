@@ -1,8 +1,8 @@
 import { HydratedDocument, model, models, Schema } from "mongoose";
 import { GenderEnum, ProviderEnum, RoleEnum } from "../../common/enums";
 import { IUser } from "../../common/interfaces";
-import { BadRequestException } from "../../common/exceptions";
 import { generateEncryption, generateHash } from "../../common/utils/security";
+import { Types } from "mongoose";
 
 
 
@@ -26,6 +26,11 @@ const userSchema = new Schema<IUser>({
         unique: true,
         required: [true, "Email Is Required"],
     },
+    friends: [{
+        type: Types.ObjectId,
+        ref: "User",
+
+    }],
     password: {
         type: String,
         required: function (this) {
@@ -159,10 +164,10 @@ userSchema.pre(["updateOne", "findOneAndUpdate"], function () {
 });
 userSchema.pre(["deleteOne", "findOneAndDelete"], function () {
 
-    
-    
+
+
     const query = this.getQuery();
-    console.log({query});
+    console.log({ query });
 
     if (query.force === true) {
 

@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { confirmEmail, login, resendConfirmEmail, signup } from "./auth.validation";
+import { confirmEmail, login, signup } from "./auth.validation";
 
 // export interface LoginDTO {
 //     email: string;

@@ -1,3 +1,4 @@
+import { Types } from "mongoose";
 import { GenderEnum, ProviderEnum, RoleEnum } from "../enums";
 
 export interface IUser {
@@ -10,6 +11,7 @@ export interface IUser {
     phone?: string;
     ProfileImage?: string;
     coverImages?: string[];
+    friends?: Types.ObjectId[] | IUser[];
     DOB?: Date;
     confirmedEmail?: Date;
     changeCredentialsTime?: Date;

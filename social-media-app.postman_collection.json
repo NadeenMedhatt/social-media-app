@@ -43,7 +43,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"email\":\"nadeenmedhat01@gmail.com\",\r\n    \"otp\":\"550402\"\r\n}",
+              "raw": "{\r\n    \"email\":\"nadeenmedhat01@gmail.com\",\r\n    \"otp\":\"109758\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -51,9 +51,9 @@
               }
             },
             "url": {
-              "raw": "{{url}}/auth/confirm-email",
+              "raw": "{{Base_Url}}/auth/confirm-email",
               "host": [
-                "{{url}}"
+                "{{Base_Url}}"
               ],
               "path": [
                 "auth",
@@ -78,9 +78,9 @@
               }
             },
             "url": {
-              "raw": "{{url}}/auth/resend-confirm-email",
+              "raw": "{{Base_Url}}{/auth/resend-confirm-email",
               "host": [
-                "{{url}}"
+                "{{Base_Url}}{"
               ],
               "path": [
                 "auth",
@@ -113,7 +113,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"email\":\"nadeenmedhat01@gmail.com\",\r\n    \"password\":\"Nn123456@\",\r\n    \"FCM\":\"cYYAq78nQ_rMxlcYCVvMN0:APA91bHrFTtontGQsmzs7Wx5vdowR5ZNnbyayEjZWE5nIPGid97wDwtLG4p3c0iCp3QAT307UvReHs_hzzDtg_ieyO3D9ASnI0jj8mHefzgR5D-b32ZWlKs\"\r\n}",
+              "raw": "{\r\n    \"email\":\"nadeenmedhat01@gmail.com\",\r\n    \"password\":\"Nn123456@\"\r\n    // ,\r\n    // \"FCM\":\"cYYAq78nQ_rMxlcYCVvMN0:APA91bHrFTtontGQsmzs7Wx5vdowR5ZNnbyayEjZWE5nIPGid97wDwtLG4p3c0iCp3QAT307UvReHs_hzzDtg_ieyO3D9ASnI0jj8mHefzgR5D-b32ZWlKs\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -121,9 +121,9 @@
               }
             },
             "url": {
-              "raw": "{{url}}/auth/login",
+              "raw": "{{Base_Url}}/auth/login",
               "host": [
-                "{{url}}"
+                "{{Base_Url}}"
               ],
               "path": [
                 "auth",
@@ -162,9 +162,9 @@
               }
             },
             "url": {
-              "raw": "{{url}}/user",
+              "raw": "{{Base_Url}}{/user",
               "host": [
-                "{{url}}"
+                "{{Base_Url}}{"
               ],
               "path": [
                 "user"
@@ -205,9 +205,9 @@
               }
             },
             "url": {
-              "raw": "{{url}}/user/logout",
+              "raw": "{{Base_Url}}{/user/logout",
               "host": [
-                "{{url}}"
+                "{{Base_Url}}{"
               ],
               "path": [
                 "user",
@@ -248,9 +248,9 @@
               }
             },
             "url": {
-              "raw": "{{url}}/user/profile-image",
+              "raw": "{{Base_Url}}{/user/profile-image",
               "host": [
-                "{{url}}"
+                "{{Base_Url}}{"
               ],
               "path": [
                 "user",
@@ -296,9 +296,9 @@
               ]
             },
             "url": {
-              "raw": "{{url}}/user/profile-cover-images",
+              "raw": "{{Base_Url}}{/user/profile-cover-images",
               "host": [
-                "{{url}}"
+                "{{Base_Url}}{"
               ],
               "path": [
                 "user",
@@ -339,9 +339,9 @@
               }
             },
             "url": {
-              "raw": "{{url}}/user/rotate",
+              "raw": "{{Base_Url}}/user/rotate",
               "host": [
-                "{{url}}"
+                "{{Base_Url}}"
               ],
               "path": [
                 "user",
@@ -366,10 +366,14 @@
             },
             "method": "DELETE",
             "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
             "url": {
-              "raw": "{{url}}/user",
+              "raw": "{{Base_Url}}/user",
               "host": [
-                "{{url}}"
+                "{{Base_Url}}"
               ],
               "path": [
                 "user"
@@ -403,7 +407,7 @@
               "formdata": [
                 {
                   "key": "content",
-                  "value": "",
+                  "value": "post4",
                   "type": "text",
                   "uuid": "bb327e5f-b1b9-4303-93a9-ab82dac8697a"
                 },
@@ -413,19 +417,20 @@
                   "uuid": "5e314103-e0ed-400a-8aad-84afdfd5738c",
                   "src": [
                     "/C:/Users/MHNSM/Desktop/photos/images.jpg",
-                    "/C:/Users/MHNSM/Desktop/photos/images.jpg"
-                  ]
+                    "/C:/Users/MHNSM/Desktop/general/images.png"
+                  ],
+                  "disabled": true
                 },
                 {
                   "key": "tags[0]",
-                  "value": "",
+                  "value": "6a0395f1711ed7d03c9628d2",
                   "type": "text",
                   "uuid": "8f17667b-a505-49e3-8294-853c19b2e894",
                   "disabled": true
                 },
                 {
                   "key": "availability",
-                  "value": "",
+                  "value": "2",
                   "type": "text",
                   "uuid": "2ce68c90-b886-46fd-8cd9-ae9ab317cb70",
                   "disabled": true
@@ -439,6 +444,668 @@
               ],
               "path": [
                 "post"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "list-posts",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{Base_Url}}/post?page=1&size=2",
+              "host": [
+                "{{Base_Url}}"
+              ],
+              "path": [
+                "post"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "size",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "profile-posts",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{Base_Url}}/post/profile?page=1&size=2",
+              "host": [
+                "{{Base_Url}}"
+              ],
+              "path": [
+                "post",
+                "profile"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "size",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "like-posts",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{Base_Url}}/post/6a077d4a41611819b4c3c030/react?react=0",
+              "host": [
+                "{{Base_Url}}"
+              ],
+              "path": [
+                "post",
+                "6a077d4a41611819b4c3c030",
+                "react"
+              ],
+              "query": [
+                {
+                  "key": "react",
+                  "value": "0"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update-posts",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "content",
+                  "value": "zz",
+                  "type": "text",
+                  "uuid": "bb327e5f-b1b9-4303-93a9-ab82dac8697a"
+                },
+                {
+                  "key": "attachments",
+                  "type": "file",
+                  "uuid": "5e314103-e0ed-400a-8aad-84afdfd5738c",
+                  "src": [
+                    "/C:/Users/MHNSM/Desktop/photos/images.jpg",
+                    "/C:/Users/MHNSM/Desktop/general/images.png"
+                  ],
+                  "disabled": true
+                },
+                {
+                  "key": "tags[0]",
+                  "value": "6a03962f711ed7d03c9628d3",
+                  "type": "text",
+                  "uuid": "8f17667b-a505-49e3-8294-853c19b2e894",
+                  "disabled": true
+                },
+                {
+                  "key": "availability",
+                  "value": "",
+                  "type": "text",
+                  "uuid": "2ce68c90-b886-46fd-8cd9-ae9ab317cb70",
+                  "disabled": true
+                },
+                {
+                  "key": "removeFiles[0]",
+                  "value": "Social Media App/post/a55a61a8-b231-4b39-8d06-d10415aece33/08a286e7-ff8e-479f-95c0-4ea7432b80c0__images.png",
+                  "type": "text",
+                  "uuid": "1894df9a-3d36-4b1e-9348-da7b4174811b",
+                  "disabled": true
+                },
+                {
+                  "key": "removeFiles[1]",
+                  "value": "Social Media App/post/a55a61a8-b231-4b39-8d06-d10415aece33/413d0aa8-0084-4b35-aaa1-14321f5b8924__images.jpg",
+                  "type": "text",
+                  "uuid": "7393b080-2c22-47a2-b979-32ef8e5c131f",
+                  "disabled": true
+                },
+                {
+                  "key": "removeFiles[2]",
+                  "value": "Social Media App/post/a55a61a8-b231-4b39-8d06-d10415aece33/b891bab8-183a-47a6-8a76-d281f5bd442e__images.jpg",
+                  "type": "text",
+                  "uuid": "2c8b7c6e-f33b-46cf-a9cc-24f27e1d8366",
+                  "disabled": true
+                },
+                {
+                  "key": "removeFiles[3]",
+                  "value": "Social Media App/post/a55a61a8-b231-4b39-8d06-d10415aece33/f5e6d70b-7228-4f76-bec6-c1c079441bfe__images.png",
+                  "type": "text",
+                  "uuid": "16c252da-22d4-4450-887c-9371bb34a14a",
+                  "disabled": true
+                },
+                {
+                  "key": "removeTags[0]",
+                  "value": "",
+                  "type": "text",
+                  "uuid": "6dc85c15-5e56-4041-8384-54e258952a6c",
+                  "disabled": true
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{Base_Url}}/post/6a119cf1a326194bee74386e",
+              "host": [
+                "{{Base_Url}}"
+              ],
+              "path": [
+                "post",
+                "6a119cf1a326194bee74386e"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete-posts",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{Base_Url}}/post/6a078b13142324e951c535ed",
+              "host": [
+                "{{Base_Url}}"
+              ],
+              "path": [
+                "post",
+                "6a078b13142324e951c535ed"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "comments",
+      "item": [
+        {
+          "name": "create-comment",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "content",
+                  "value": "reply",
+                  "type": "text",
+                  "uuid": "bb327e5f-b1b9-4303-93a9-ab82dac8697a"
+                },
+                {
+                  "key": "attachments",
+                  "type": "file",
+                  "uuid": "5e314103-e0ed-400a-8aad-84afdfd5738c",
+                  "src": "/C:/Users/MHNSM/Desktop/photos/images.jpg"
+                },
+                {
+                  "key": "tags[0]",
+                  "value": "6a0395f1711ed7d03c9628d2",
+                  "type": "text",
+                  "uuid": "8f17667b-a505-49e3-8294-853c19b2e894",
+                  "disabled": true
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{Base_Url}}/post/6a119cf1a326194bee74386e/comment/",
+              "host": [
+                "{{Base_Url}}"
+              ],
+              "path": [
+                "post",
+                "6a119cf1a326194bee74386e",
+                "comment",
+                ""
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "create-comment-reply",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "content",
+                  "value": "reply1",
+                  "type": "text",
+                  "uuid": "bb327e5f-b1b9-4303-93a9-ab82dac8697a"
+                },
+                {
+                  "key": "attachments",
+                  "type": "file",
+                  "uuid": "5e314103-e0ed-400a-8aad-84afdfd5738c",
+                  "src": [
+                    "/C:/Users/MHNSM/Desktop/photos/images.jpg",
+                    "/C:/Users/MHNSM/Desktop/general/images.png"
+                  ],
+                  "disabled": true
+                },
+                {
+                  "key": "tags[0]",
+                  "value": "6a0395f1711ed7d03c9628d2",
+                  "type": "text",
+                  "uuid": "8f17667b-a505-49e3-8294-853c19b2e894",
+                  "disabled": true
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{Base_Url}}/post/6a119cf1a326194bee74386e/comment/6a119d48a326194bee74386f/reply",
+              "host": [
+                "{{Base_Url}}"
+              ],
+              "path": [
+                "post",
+                "6a119cf1a326194bee74386e",
+                "comment",
+                "6a119d48a326194bee74386f",
+                "reply"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "list-comments",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{Base_Url}}/post/6a078c55e08ecc04cb66dd3a/comment?page=1&size=2",
+              "host": [
+                "{{Base_Url}}"
+              ],
+              "path": [
+                "post",
+                "6a078c55e08ecc04cb66dd3a",
+                "comment"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "size",
+                  "value": "2"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "like-comment",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{Base_Url}}/comment/6a0718f4918315072f1f1558/react?react=0",
+              "host": [
+                "{{Base_Url}}"
+              ],
+              "path": [
+                "comment",
+                "6a0718f4918315072f1f1558",
+                "react"
+              ],
+              "query": [
+                {
+                  "key": "react",
+                  "value": "0"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update-comment",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "content",
+                  "value": "updated comment",
+                  "type": "text",
+                  "uuid": "bb327e5f-b1b9-4303-93a9-ab82dac8697a"
+                },
+                {
+                  "key": "attachments",
+                  "type": "file",
+                  "uuid": "5e314103-e0ed-400a-8aad-84afdfd5738c",
+                  "src": [
+                    "/C:/Users/MHNSM/Desktop/photos/images.jpg",
+                    "/C:/Users/MHNSM/Desktop/general/images.png"
+                  ],
+                  "disabled": true
+                },
+                {
+                  "key": "tags[0]",
+                  "value": "6a03962f711ed7d03c9628d3",
+                  "type": "text",
+                  "uuid": "8f17667b-a505-49e3-8294-853c19b2e894",
+                  "disabled": true
+                },
+                {
+                  "key": "availability",
+                  "value": "",
+                  "type": "text",
+                  "uuid": "2ce68c90-b886-46fd-8cd9-ae9ab317cb70",
+                  "disabled": true
+                },
+                {
+                  "key": "removeFiles[0]",
+                  "value": "Social Media App/post/a55a61a8-b231-4b39-8d06-d10415aece33/08a286e7-ff8e-479f-95c0-4ea7432b80c0__images.png",
+                  "type": "text",
+                  "uuid": "1894df9a-3d36-4b1e-9348-da7b4174811b",
+                  "disabled": true
+                },
+                {
+                  "key": "removeFiles[1]",
+                  "value": "Social Media App/post/a55a61a8-b231-4b39-8d06-d10415aece33/413d0aa8-0084-4b35-aaa1-14321f5b8924__images.jpg",
+                  "type": "text",
+                  "uuid": "7393b080-2c22-47a2-b979-32ef8e5c131f",
+                  "disabled": true
+                },
+                {
+                  "key": "removeFiles[2]",
+                  "value": "Social Media App/post/a55a61a8-b231-4b39-8d06-d10415aece33/b891bab8-183a-47a6-8a76-d281f5bd442e__images.jpg",
+                  "type": "text",
+                  "uuid": "2c8b7c6e-f33b-46cf-a9cc-24f27e1d8366",
+                  "disabled": true
+                },
+                {
+                  "key": "removeFiles[3]",
+                  "value": "Social Media App/post/a55a61a8-b231-4b39-8d06-d10415aece33/f5e6d70b-7228-4f76-bec6-c1c079441bfe__images.png",
+                  "type": "text",
+                  "uuid": "16c252da-22d4-4450-887c-9371bb34a14a",
+                  "disabled": true
+                },
+                {
+                  "key": "removeTags[0]",
+                  "value": "",
+                  "type": "text",
+                  "uuid": "6dc85c15-5e56-4041-8384-54e258952a6c",
+                  "disabled": true
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{Base_Url}}/post/6a078c55e08ecc04cb66dd3a/comment/6a078d16e08ecc04cb66dd3c",
+              "host": [
+                "{{Base_Url}}"
+              ],
+              "path": [
+                "post",
+                "6a078c55e08ecc04cb66dd3a",
+                "comment",
+                "6a078d16e08ecc04cb66dd3c"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete-posts",
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{BEARER_ACCESS_TOKEN}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "content",
+                  "value": "zz",
+                  "type": "text",
+                  "uuid": "bb327e5f-b1b9-4303-93a9-ab82dac8697a",
+                  "disabled": true
+                },
+                {
+                  "key": "attachments",
+                  "type": "file",
+                  "uuid": "5e314103-e0ed-400a-8aad-84afdfd5738c",
+                  "src": [
+                    "/C:/Users/MHNSM/Desktop/photos/images.jpg",
+                    "/C:/Users/MHNSM/Desktop/general/images.png"
+                  ],
+                  "disabled": true
+                },
+                {
+                  "key": "tags[0]",
+                  "value": "6a03962f711ed7d03c9628d3",
+                  "type": "text",
+                  "uuid": "8f17667b-a505-49e3-8294-853c19b2e894",
+                  "disabled": true
+                },
+                {
+                  "key": "availability",
+                  "value": "",
+                  "type": "text",
+                  "uuid": "2ce68c90-b886-46fd-8cd9-ae9ab317cb70",
+                  "disabled": true
+                },
+                {
+                  "key": "removeFiles[0]",
+                  "value": "Social Media App/post/a55a61a8-b231-4b39-8d06-d10415aece33/08a286e7-ff8e-479f-95c0-4ea7432b80c0__images.png",
+                  "type": "text",
+                  "uuid": "1894df9a-3d36-4b1e-9348-da7b4174811b",
+                  "disabled": true
+                },
+                {
+                  "key": "removeFiles[1]",
+                  "value": "Social Media App/post/a55a61a8-b231-4b39-8d06-d10415aece33/413d0aa8-0084-4b35-aaa1-14321f5b8924__images.jpg",
+                  "type": "text",
+                  "uuid": "7393b080-2c22-47a2-b979-32ef8e5c131f",
+                  "disabled": true
+                },
+                {
+                  "key": "removeFiles[2]",
+                  "value": "Social Media App/post/a55a61a8-b231-4b39-8d06-d10415aece33/b891bab8-183a-47a6-8a76-d281f5bd442e__images.jpg",
+                  "type": "text",
+                  "uuid": "2c8b7c6e-f33b-46cf-a9cc-24f27e1d8366",
+                  "disabled": true
+                },
+                {
+                  "key": "removeFiles[3]",
+                  "value": "Social Media App/post/a55a61a8-b231-4b39-8d06-d10415aece33/f5e6d70b-7228-4f76-bec6-c1c079441bfe__images.png",
+                  "type": "text",
+                  "uuid": "16c252da-22d4-4450-887c-9371bb34a14a",
+                  "disabled": true
+                },
+                {
+                  "key": "removeTags[0]",
+                  "value": "",
+                  "type": "text",
+                  "uuid": "6dc85c15-5e56-4041-8384-54e258952a6c",
+                  "disabled": true
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{Base_Url}}/post/6a078c55e08ecc04cb66dd3a/comment/6a078c64e08ecc04cb66dd3b",
+              "host": [
+                "{{Base_Url}}"
+              ],
+              "path": [
+                "post",
+                "6a078c55e08ecc04cb66dd3a",
+                "comment",
+                "6a078c64e08ecc04cb66dd3b"
               ]
             }
           },

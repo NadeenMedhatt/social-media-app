@@ -6,17 +6,17 @@ const exceptions_1 = require("../../common/exceptions");
 const email_1 = require("../../common/utils/email");
 const security_1 = require("../../common/utils/security");
 const model_1 = require("../../DB/model");
-const user_repository_1 = require("../../DB/repository/user.repository");
 const utils_1 = require("../../common/utils");
 const google_auth_library_1 = require("google-auth-library");
 const config_1 = require("../../config/config");
+const repository_1 = require("../../DB/repository");
 class AuthService {
     userRepository;
     redis;
     tokenService;
     notification;
     constructor() {
-        this.userRepository = new user_repository_1.UserRepository();
+        this.userRepository = new repository_1.UserRepository();
         this.redis = services_1.redisService;
         this.tokenService = new services_1.TokenService();
         this.notification = services_1.notificationService;

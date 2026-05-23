@@ -1,10 +1,25 @@
 import { HydratedDocument, model, models, Schema } from "mongoose";
-import { AvailabilityEnum, GenderEnum, ProviderEnum, RoleEnum } from "../../common/enums";
-import { IPost } from "../../common/interfaces";
+import { AvailabilityEnum, ReactEnum } from "../../common/enums";
+import { IPost, IReaction } from "../../common/interfaces";
 import { Types } from "mongoose";
 
 
+export const reactionSchema = new Schema<IReaction>(
+    {
+        userId: {
+            type: Types.ObjectId,
+            ref: "User",
+            required: true,
+        },
+        react: {
+            type: Number,
+            enum: ReactEnum,
 
+            required: true,
+        },
+    },
+    { _id: false }
+);
 
 const postSchema = new Schema<IPost>({
     folderId: {
@@ -22,10 +37,10 @@ const postSchema = new Schema<IPost>({
     attachments: {
         type: [String],
     },
-    likes: [{
-        type: Types.ObjectId,
-        ref: "User"
-    }],
+    likes: {
+        type: [reactionSchema],
+        default: [],
+    },
     tags: [{
         type: Types.ObjectId,
         ref: "User"
@@ -67,9 +82,14 @@ const postSchema = new Schema<IPost>({
 })
 
 
+postSchema.virtual("comments", {
+    localField: "_id",
+    foreignField: "postId",
+    ref: "Comment",
+    justOne: true
+})
 
-
-postSchema.pre(["findOne", "find"], function () {
+postSchema.pre(["findOne", "find", 'countDocuments'], function () {
 
     const query = this.getQuery();
 
@@ -111,7 +131,6 @@ postSchema.pre(["deleteOne", "findOneAndDelete"], function () {
 
 
     const query = this.getQuery();
-    console.log({ query });
 
     if (query.force === true) {
 

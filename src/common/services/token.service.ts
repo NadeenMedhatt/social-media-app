@@ -3,12 +3,12 @@ import { ACCESS_EXPIRE_IN, REFRESH_EXPIRE_IN, SYSTEM_REFRESH_TOKEN_SECRET_KEY, S
 import { AudienceEnum, RoleEnum, TokenTypeEnum } from "../enums";
 import { BadRequestException, UnAuthorizedException } from "../exceptions";
 import { redisService, RedisService } from "./redis.service";
-import { UserRepository } from "../../DB/repository/user.repository";
 import { UserModel } from "../../DB/model";
 import { HydratedDocument } from "mongoose";
 import { IUser } from "../interfaces";
 import { randomUUID } from "node:crypto";
 import { Types } from "mongoose";
+import { UserRepository } from "../../DB/repository";
 
 export class TokenService {
 

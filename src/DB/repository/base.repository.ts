@@ -1,5 +1,6 @@
 import { DeleteResult, FlattenMaps, MongooseUpdateQueryOptions, PopulateOptions, ProjectionType, QueryOptions, Types, UpdateQuery, UpdateWithAggregationPipeline, UpdateWriteOpResult } from "mongoose";
 import { AnyKeys, CreateOptions, HydratedDocument, Model, QueryFilter } from "mongoose";
+import { IPaginate } from "../../common/types";
 
 export abstract class BaseRepository<TRawDocument> {
 
@@ -34,7 +35,7 @@ export abstract class BaseRepository<TRawDocument> {
     }: {
         filter: QueryFilter<TRawDocument>,
         projection?: ProjectionType<TRawDocument> | null | undefined,
-        options?: QueryOptions<TRawDocument> & { lean: false }
+        options?: QueryOptions<TRawDocument> & { lean?: false, populate?: PopulateOptions }
     }): Promise<HydratedDocument<TRawDocument> | null>;
     async findOne({
         filter,
@@ -43,7 +44,7 @@ export abstract class BaseRepository<TRawDocument> {
     }: {
         filter: QueryFilter<TRawDocument>,
         projection?: ProjectionType<TRawDocument> | null | undefined,
-        options?: QueryOptions<TRawDocument> & { lean: true }
+        options?: QueryOptions<TRawDocument> & { lean?: true, populate?: PopulateOptions[] }
     }): Promise<FlattenMaps<TRawDocument> | null>;
 
     async findOne({
@@ -69,12 +70,51 @@ export abstract class BaseRepository<TRawDocument> {
         filter: QueryFilter<TRawDocument>,
         projection?: ProjectionType<TRawDocument> | null | undefined,
         options?: QueryOptions<TRawDocument>
-    }): Promise<FlattenMaps<TRawDocument>[] | HydratedDocument<TRawDocument>[]> {
+    }): Promise<HydratedDocument<TRawDocument>[]> {
 
         const doc = this.model.find(filter, projection);
         if (options?.populate) { doc.populate(options.populate as PopulateOptions[]) }
-        if (options?.lean) { doc.lean(options.lean) }
+        if (options?.skip) { doc.skip(options.skip) }
+        if (options?.limit) { doc.limit(options.limit) }
+        // if (options?.lean) { doc.lean(options.lean) }
         return await doc.exec()
+    }
+    async paginate({
+        filter = {},
+        projection,
+        options = {},
+        page = undefined,
+        size = 5,
+    }: {
+        filter: QueryFilter<TRawDocument>,
+        projection?: ProjectionType<TRawDocument> | null | undefined,
+        options?: QueryOptions<TRawDocument>,
+        page?: string | number | undefined,
+        size?: string | number | undefined,
+    }): Promise<IPaginate<TRawDocument>> {
+
+        let count = 0;
+        if (Number(page) > 0) {
+            page = parseInt(page as string);
+            size = parseInt(size as string);
+            options.skip = (page - 1) * size;
+            options.limit = size;
+            count = await this.model.countDocuments(filter)
+
+        }
+        const docs = await this.find({
+            filter,
+            projection,
+            options
+        });
+        return {
+            docs,
+            currentPage: Number(page),
+            pageSize: page ? Number(size) : undefined,
+            count: page ? Number(count) : undefined,
+            pages: page ? Math.ceil(count / Number(size)) : undefined,
+        }
+
     }
     async findById({
         _id,
@@ -146,6 +186,18 @@ export abstract class BaseRepository<TRawDocument> {
         update: UpdateQuery<TRawDocument> | UpdateWithAggregationPipeline,
         options?: MongooseUpdateQueryOptions<TRawDocument>
     }): Promise<HydratedDocument<TRawDocument> | null> {
+
+
+
+
+        if (Array.isArray(update)) {
+
+            update.push({ $set: { __v: { $add: ["$__v", 1] } } });
+
+            return await this.model.findOneAndUpdate(filter, update, { ...options, updatePipeline: true })
+
+        }
+
         return await this.model.findOneAndUpdate(filter, { ...update, $inc: { __v: 1 } }, options)
     }
 

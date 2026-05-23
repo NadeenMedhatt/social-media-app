@@ -5,11 +5,11 @@ import { IUser } from "../../common/interfaces";
 import { emailTemplate, sendEmail } from "../../common/utils/email";
 import { compareHash, generateHash } from "../../common/utils/security";
 import { UserModel } from "../../DB/model";
-import { UserRepository } from "../../DB/repository/user.repository";
 import { ConfirmEmailDTO, LoginDTO, SignupDTO } from "./auth.dto";
 import { createNumberOtp } from '../../common/utils';
 import { OAuth2Client, TokenPayload } from 'google-auth-library';
 import { CLIENT_IDS } from '../../config/config';
+import { UserRepository } from '../../DB/repository';
 
 class AuthService {
     private userRepository: UserRepository

@@ -16,3 +16,4 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./user.interface"), exports);
 __exportStar(require("./post.interface"), exports);
+__exportStar(require("./comment.interface"), exports);

@@ -4,6 +4,7 @@ exports.UserModel = void 0;
 const mongoose_1 = require("mongoose");
 const enums_1 = require("../../common/enums");
 const security_1 = require("../../common/utils/security");
+const mongoose_2 = require("mongoose");
 const userSchema = new mongoose_1.Schema({
     firstName: {
         type: String,
@@ -22,6 +23,10 @@ const userSchema = new mongoose_1.Schema({
         unique: true,
         required: [true, "Email Is Required"],
     },
+    friends: [{
+            type: mongoose_2.Types.ObjectId,
+            ref: "User",
+        }],
     password: {
         type: String,
         required: function () {

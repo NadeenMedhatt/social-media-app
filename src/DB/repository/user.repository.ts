@@ -1,5 +1,5 @@
 import { UserModel } from './../model/user.model';
-import { BaseRepository } from "./base.repository";
+import { BaseRepository } from "./";
 import { IUser } from "../../common/interfaces";
 
 export class UserRepository extends BaseRepository<IUser> {

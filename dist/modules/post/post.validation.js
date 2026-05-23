@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.createPost = void 0;
+exports.reactOnPost = exports.deletePost = exports.updatePost = exports.createPost = void 0;
 const zod_1 = require("zod");
 const validation_1 = require("../../common/validation");
 const enums_1 = require("../../common/enums");
@@ -39,5 +39,48 @@ exports.createPost = {
                 }
             }
         }
+    })
+};
+exports.updatePost = {
+    params: zod_1.z.strictObject({
+        postId: validation_1.generalValidationFields.id,
+    }),
+    body: zod_1.z.strictObject({
+        content: zod_1.z.string().optional(),
+        files: zod_1.z.array(validation_1.generalValidationFields.files(multer_1.fileFieldValidation.image)).optional(),
+        tags: zod_1.z.array(validation_1.generalValidationFields.id).optional(),
+        availability: zod_1.z.coerce.number().default(enums_1.AvailabilityEnum.PUBLIC).optional(),
+        removeFiles: zod_1.z.array(zod_1.z.string()).optional(),
+        removeTags: zod_1.z.array(validation_1.generalValidationFields.id).optional(),
+    }).superRefine((args, ctx) => {
+        if (!Object.values(args).length) {
+            ctx.addIssue({
+                code: "custom",
+                message: "Cannot accept all field empty"
+            });
+        }
+        if (args.tags?.length) {
+            const uniqueTags = [...new Set(args.tags)];
+            if (uniqueTags.length != args.tags.length) {
+                ctx.addIssue({
+                    code: "custom",
+                    path: ["tags"],
+                    message: "Duplicated Tag"
+                });
+            }
+        }
+    })
+};
+exports.deletePost = {
+    params: zod_1.z.strictObject({
+        postId: validation_1.generalValidationFields.id,
+    }),
+};
+exports.reactOnPost = {
+    params: zod_1.z.strictObject({
+        postId: validation_1.generalValidationFields.id,
+    }),
+    query: zod_1.z.strictObject({
+        react: zod_1.z.coerce.number(),
     })
 };

@@ -9,15 +9,15 @@ const config_1 = require("../../config/config");
 const enums_1 = require("../enums");
 const exceptions_1 = require("../exceptions");
 const redis_service_1 = require("./redis.service");
-const user_repository_1 = require("../../DB/repository/user.repository");
 const model_1 = require("../../DB/model");
 const node_crypto_1 = require("node:crypto");
+const repository_1 = require("../../DB/repository");
 class TokenService {
     redis;
     userRepository;
     constructor() {
         this.redis = redis_service_1.redisService;
-        this.userRepository = new user_repository_1.UserRepository(model_1.UserModel);
+        this.userRepository = new repository_1.UserRepository(model_1.UserModel);
     }
     async generateToken({ payload, secret = config_1.USER_TOKEN_SECRET_KEY, options }) {
         return jsonwebtoken_1.default.sign(payload, secret, options);

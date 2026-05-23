@@ -1,17 +1,22 @@
 import { Types } from "mongoose";
-import { AvailabilityEnum, GenderEnum, ProviderEnum, RoleEnum } from "../enums";
+import { AvailabilityEnum, ReactEnum } from "../enums";
 import { IUser } from "./user.interface";
 
+
+export interface IReaction {
+    userId: Types.ObjectId;
+    react: ReactEnum;
+}
 export interface IPost {
     folderId: string;
     content?: string;
     attachments?: string[];
-    likes?: Types.ObjectId[] | IUser[];
+    likes?: IReaction[];
     tags?: Types.ObjectId[] | IUser[];
     availability: AvailabilityEnum
 
-    createdBy: Types.ObjectId;
-    updatedBy?: Types.ObjectId;
+    createdBy: Types.ObjectId | IUser;
+    updatedBy?: Types.ObjectId | IUser;
 
     createdAt: Date;
     updatedAt?: Date;
